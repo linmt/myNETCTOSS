@@ -16,7 +16,7 @@ import java.util.List;
 public class CostDAOImpl implements ICostDAO{
     public List<Cost> findAll() throws RuntimeException {
         List<Cost> list = new ArrayList<Cost>();
-        String sql = "select * from COST order by cost_id";
+        String sql = "select * from COST order by id";
         Connection conn = DBUtil.getConnection();
         try{
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -35,7 +35,7 @@ public class CostDAOImpl implements ICostDAO{
     }
     private Cost createCost(ResultSet rs) throws SQLException {
         Cost c = new Cost();
-        c.setId(rs.getInt("cost_id"));
+        c.setId(rs.getInt("id"));
         c.setCost_name(rs.getString("name"));
         c.setBase_duration(rs.getInt("base_duration"));
         c.setBase_cost(rs.getDouble("base_cost"));
