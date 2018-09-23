@@ -47,7 +47,7 @@ public interface ICostDAO {
      * @param cost
      * @throws Exception
      */
-    void addCost(Cost cost) throws Exception;
+    void save(Cost cost) throws Exception;
 
     /**
      * 根据id查询id

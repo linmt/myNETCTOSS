@@ -36,24 +36,24 @@ public class CostDAOImpl implements ICostDAO{
     private Cost createCost(ResultSet rs) throws SQLException {
         Cost c = new Cost();
         c.setId(rs.getInt("id"));
-        c.setCost_name(rs.getString("name"));
+        c.setCost_name(rs.getString("cost_name"));
         c.setBase_duration(rs.getInt("base_duration"));
         c.setBase_cost(rs.getDouble("base_cost"));
         c.setUnit_cost(rs.getDouble("unit_cost"));
         c.setStatus(rs.getString("status"));
         c.setDescr(rs.getString("descr"));
-        c.setCreat_date(rs.getTimestamp("creatime"));
-        c.setStart_date(rs.getTimestamp("startime"));
+        c.setCreat_date(rs.getTimestamp("creat_date"));
+        c.setStart_date(rs.getTimestamp("start_date"));
         c.setCost_type(rs.getString("cost_type"));
         return c;
     }
     public static void main(String[] args) throws Exception{
         ICostDAO dao = new CostDAOImpl();
-		List<Cost> list = dao.findAll();
+//		List<Cost> list = dao.findAll();
 //		List<Cost> list = dao.findByPage(1, 5);
-		for(Cost  c : list){
-			System.out.println(c.getId()+" "+c.getCost_name()+" "+c.getCost_type());
-		}
+//		for(Cost  c : list){
+//			System.out.println(c.getId()+" "+c.getCost_name()+" "+c.getCost_type());
+//		}
 //		System.out.println(dao.findTotalPage(5));
 //		dao.deleteCost(6);
 
@@ -78,6 +78,14 @@ public class CostDAOImpl implements ICostDAO{
 //		System.out.println(cost.getCost_name()+","+cost.getBase_cost());
 //		System.out.println(cost.getCost_name()+","+cost.getBase_duration());
 //		dao.deleteCost(1);
+        Cost c=new Cost();
+        c.setCost_name("包月");
+//        c.setBase_duration(600);
+        c.setBase_cost(1000.0);
+//        c.setUnit_cost(0.6);
+        c.setDescr("包月很爽");
+        c.setCost_type("1");
+        dao.save(c);
     }
     public List<Cost> findByPage(int page, int pageSize) throws Exception {
 		/*
@@ -177,7 +185,7 @@ public class CostDAOImpl implements ICostDAO{
         }
         return null;
     }
-    public void addCost(Cost cost) throws Exception {
+    public void save(Cost cost) throws Exception {
         if(cost == null){
             return;
         }
@@ -196,7 +204,6 @@ public class CostDAOImpl implements ICostDAO{
             prep.setObject(6, cost.getCost_type());
             prep.executeUpdate();
             conn.commit();
-
         } catch (SQLException e) {
             try {
                 conn.rollback();
@@ -208,7 +215,6 @@ public class CostDAOImpl implements ICostDAO{
         }finally{
             DBUtil.closeConnection();
         }
-
     }
     public Cost findById(int id) throws Exception {
         String sql = "select * from cost " +
