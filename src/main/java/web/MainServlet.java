@@ -36,6 +36,12 @@ public class MainServlet extends HttpServlet {
             updateCost(request,response);
         }else if("/deleteCost.do".equals(p)){
             deleteCost(request,response);
+        }else if("/toLogin.do".equals(p)){
+            toLogin(request,response);
+        }else if("/toIndex.do".equals(p)){
+            toIndex(request,response);
+        }else if("/login.do".equals(p)){
+            login(request,response);
         }else{
             throw new RuntimeException("地址错误");
         }
@@ -150,5 +156,20 @@ public class MainServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //打开登录页面
+    protected void toLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
+    }
+
+    //打开主页
+    protected void toIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getRequestDispatcher("WEB-INF/main/index.jsp").forward(request, response);
+    }
+
+    //打开主页
+    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getRequestDispatcher("WEB-INF/main/index.jsp").forward(request, response);
     }
 }
