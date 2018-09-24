@@ -1,7 +1,10 @@
 package web;
 
+import dao.cost.AdminDAO;
+import dao.cost.AdminDAOImpl;
 import dao.cost.CostDAOImpl;
 import dao.cost.CostDAO;
+import entity.Admin;
 import entity.Cost;
 
 import javax.servlet.ServletException;
@@ -170,6 +173,23 @@ public class MainServlet extends HttpServlet {
 
     //打开主页
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        request.getRequestDispatcher("WEB-INF/main/index.jsp").forward(request, response);
+        String admin_code=request.getParameter("admin_code");
+        String password=request.getParameter("password");
+        //校验
+        AdminDAO dao=new AdminDAOImpl();
+        try {
+            Admin a=dao.findByCode(admin_code);
+            if(a==null){
+                request.setAttribute("error","账号错误");
+                request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
+            }else if(!a.getPassword().equals(password)){
+                request.setAttribute("error","密码错误");
+                request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
+            }else{
+                response.sendRedirect("toIndex.do");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
