@@ -27,18 +27,15 @@
 %>
 <!--导航区域开始-->
 <div id="index_navi">
-    <ul id="menu">
-        <li><a href="./index.jsp" class="index_on" ></a></li>
-        <li><a href="./role/findRole.do" class="role_off" ></a></li>
-        <li><a href="./admin/admin_list.html" class="admin_off"></a></li>
-        <li><a href="findCost.do" class="fee_off"></a></li>
-        <li><a href="./account/findAccount.do" class="account_off" ></a></li>
-        <li><a href="./service/findService.do" class="service_off"></a></li>
-        <li><a href="./bill/bill_list.html" class="bill_off"></a></li>
-        <li><a href="./report/report_list.html" class="report_off"></a></li>
-        <li><a href="./user/user_info.html" class="information_off"></a></li>
-        <li><a href="./user/user_modi_pwd.html" class="password_off" ></a></li>
-    </ul>
+    <%--
+    <%@include file="../public/header.jsp" %>
+    --%>
+    <%--
+        此处要站在服务器的角度看，因为import标签是服务器调用的，服务器在翻译的时候使用该标签
+        当前：
+        目标：
+    --%>
+    <c:import url="../public/header.jsp"></c:import>
 </div>
 </body>
 </html>

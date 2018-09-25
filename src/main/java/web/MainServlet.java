@@ -203,8 +203,8 @@ public class MainServlet extends HttpServlet {
         //获取账号密码
         String admin_code=request.getParameter("admin_code");
         String password=request.getParameter("password");
-        request.setAttribute("admin_code",admin_code);
-        request.setAttribute("password",password);
+        //request.setAttribute("admin_code",admin_code);
+        //request.setAttribute("password",password);
         //校验
         AdminDAO dao=new AdminDAOImpl();
         try {

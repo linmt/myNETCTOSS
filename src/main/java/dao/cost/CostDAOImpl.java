@@ -162,10 +162,8 @@ public class CostDAOImpl implements CostDAO{
         List<Cost> list = new ArrayList<Cost>();
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            //小于下一页最小值
             int nextMin = page*pageSize + 1;
             pstmt.setInt(1, nextMin);
-            //大于上一页最大值
             int lastMax = (page-1)*pageSize;
             pstmt.setInt(2, lastMax);
             ResultSet rs = pstmt.executeQuery();

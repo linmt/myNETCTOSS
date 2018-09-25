@@ -22,12 +22,12 @@
         <table>
             <tr>
                 <td class="login_info">账号：</td>
-                <td colspan="2"><input name="admin_code" type="text" class="width150" value="${admin_code}"/></td>
+                <td colspan="2"><input name="admin_code" type="text" class="width150" value="${param.admin_code}"/></td>
                 <td class="login_error_info"><span class="required">30长度的字母、数字和下划线</span></td>
             </tr>
             <tr>
                 <td class="login_info">密码：</td>
-                <td colspan="2"><input name="password" type="password" class="width150" value="${password}"/></td>
+                <td colspan="2"><input name="password" type="password" class="width150" value="${param.password}"/></td>
                 <td><span class="required">30长度的字母、数字和下划线</span></td>
             </tr>
             <tr>

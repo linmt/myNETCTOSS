@@ -72,18 +72,7 @@
 <!--Logo区域结束-->
 <!--导航区域开始-->
 <div id="navi">
-    <ul id="menu">
-        <li><a href="../index.html" class="index_off"></a></li>
-        <li><a href="../role/role_list.html" class="role_off"></a></li>
-        <li><a href="../admin/admin_list.html" class="admin_off"></a></li>
-        <li><a href="../fee/fee_list.html" class="fee_on"></a></li>
-        <li><a href="../account/account_list.html" class="account_off"></a></li>
-        <li><a href="../service/service_list.html" class="service_off"></a></li>
-        <li><a href="../bill/bill_list.html" class="bill_off"></a></li>
-        <li><a href="../report/report_list.html" class="report_off"></a></li>
-        <li><a href="../user/user_info.html" class="information_off"></a></li>
-        <li><a href="../user/user_modi_pwd.html" class="password_off"></a></li>
-    </ul>
+    <c:import url="../public/header.jsp"></c:import>
 </div>
 <!--导航区域结束-->
 <!--主要区域开始-->
@@ -146,8 +135,7 @@
 </div>
 <!--主要区域结束-->
 <div id="footer">
-    <span>[源自北美的技术，最优秀的师资，最真实的企业环境，最适用的实战项目]</span><br />
-    <span>版权所有(C)加拿大达内IT培训集团公司 </span>
+    <c:import url="../public/footer.jsp"></c:import>
 </div>
 </body>
 </html>
