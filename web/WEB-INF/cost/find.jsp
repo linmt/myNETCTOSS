@@ -67,7 +67,7 @@
 <!--导航区域结束-->
 <!--主要区域开始-->
 <div id="main">
-    <form action="" method="">
+    <form action="" method="get">
         <!--排序-->
         <div class="search_add">
             <div>
@@ -130,26 +130,22 @@
         </div>
         <!--分页-->
         <div id="pages">
-            <s:if test="page==1">
-                <a href="#">上一页</a>
-            </s:if>
-            <s:else>
-                <a href="findCost?page=<s:property value="page-1"/>">上一页</a>
-            </s:else>
-            <s:iterator begin="1" end="totalPage" var="p">
-                <s:if test="#p==page">
-                    <a href="findCost?page=<s:property value="#p"/>" class="current_page"><s:property value="#p"/></a>
-                </s:if>
-                <s:else>
-                    <a href="findCost?page=<s:property value="#p"/>"><s:property value="#p"/></a>
-                </s:else>
-            </s:iterator>
-            <s:if test="page == totalPage">
-                <a href="#">下一页</a>
-            </s:if>
-            <s:else>
-                <a href="findCost?page=<s:property value="page+1" />">下一页</a>
-            </s:else>
+            <c:if test="${page==1}"><a href="#">上一页</a></c:if>
+            <c:if test="${page>1}">
+                <a href="findCost.do?page=${page-1}">上一页</a>
+            </c:if>
+            <c:forEach var="p" begin="1" end="${totalPage}">
+                <c:if test="${p==page}">
+                    <a href="findCost.do?page=${p}" class="current_page">${p}</a>
+                </c:if>
+                <c:if test="${p!=page}">
+                    <a href="findCost.do?page=${p}">${p}</a>
+                </c:if>
+            </c:forEach>
+            <c:if test="${page==totalPage}"><a href="#">下一页</a></c:if>
+            <c:if test="${page<totalPage}">
+                <a href="findCost.do?page=${page+1}">下一页</a>
+            </c:if>
         </div>
     </form>
 </div>

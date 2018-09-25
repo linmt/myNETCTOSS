@@ -22,19 +22,21 @@
         <table>
             <tr>
                 <td class="login_info">账号：</td>
-                <td colspan="2"><input name="admin_code" type="text" class="width150" /></td>
+                <td colspan="2"><input name="admin_code" type="text" class="width150" value="${admin_code}"/></td>
                 <td class="login_error_info"><span class="required">30长度的字母、数字和下划线</span></td>
             </tr>
             <tr>
                 <td class="login_info">密码：</td>
-                <td colspan="2"><input name="password" type="password" class="width150" /></td>
+                <td colspan="2"><input name="password" type="password" class="width150" value="${password}"/></td>
                 <td><span class="required">30长度的字母、数字和下划线</span></td>
             </tr>
             <tr>
                 <td class="login_info">验证码：</td>
-                <td class="width70"><input name="" type="text" class="width70" /></td>
-                <td><img src="images/valicode.jpg" alt="验证码" title="点击更换" /></td>
-                <td><span class="required">验证码错误</span></td>
+                <td class="width70"><input name="number" type="text" class="width70" /></td>
+                <td>
+                    <img src="checkcode" alt="验证码" title="点击更换"  id="img1"/>
+                </td>
+                <td><a href="javascript:;"onclick="document.getElementById('img1').src='checkcode?'+Math.random();">看不清，换一个</a></td>
             </tr>
             <tr>
                 <td></td>

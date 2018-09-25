@@ -2,8 +2,8 @@ package web;
 
 import dao.cost.AdminDAO;
 import dao.cost.AdminDAOImpl;
-import dao.cost.CostDAOImpl;
 import dao.cost.CostDAO;
+import dao.cost.CostDAOImpl;
 import entity.Admin;
 import entity.Cost;
 
@@ -21,42 +21,65 @@ import java.util.List;
 public class MainServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String p=request.getServletPath();
-        System.out.println("MainServlet的request.getServletPath()："+p+"，结束");//   /findCost.do
-        //String uri = request.getRequestURI();
-        //String action = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
+        //String p=request.getServletPath();
+        //System.out.println("MainServlet的request.getServletPath()："+p+"，结束");//   /findCost.do
+        String uri = request.getRequestURI();
+        String action = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
-        if ("/findCost.do".equals(p)) {
-            findCost(request,response);
-        }else if("/toAddCost.do".equals(p)){
+        if (action.equals("/findCost")) {
+            findCost(request,response,session);
+        }else if(action.equals("/toAddCost")){
             toAddCost(request,response);
-        }else if("/addCost.do".equals(p)){
+        }else if(action.equals("/addCost")){
             addCost(request,response);
-        }else if("/toUpdateCost.do".equals(p)){
+        }else if(action.equals("/toUpdateCost")){
             toUpdateCost(request,response);
-        }else if("/updateCost.do".equals(p)){
+        }else if(action.equals("/updateCost")){
             updateCost(request,response);
-        }else if("/deleteCost.do".equals(p)){
+        }else if(action.equals("/deleteCost")){
             deleteCost(request,response);
-        }else if("/toLogin.do".equals(p)){
+        }else if(action.equals("/toLogin")){
             toLogin(request,response);
-        }else if("/toIndex.do".equals(p)){
+        }else if(action.equals("/toIndex")){
             toIndex(request,response);
-        }else if("/login.do".equals(p)){
-            login(request,response);
+        }else if(action.equals("/login")){
+            login(request,response,session);
+        }else if(action.equals("/logout")){
+            session.invalidate();
+            response.sendRedirect("toLogin.do");
         }else{
             throw new RuntimeException("地址错误");
         }
     }
     //查询资费
-    protected void findCost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        CostDAO dao=new CostDAOImpl();
-        List<Cost> list=dao.findAll();
-        request.setAttribute("costs", list);
+    protected void findCost(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws ServletException, IOException{
+        //CostDAO dao=new CostDAOImpl();
+        //List<Cost> list=dao.findAll();
+        //request.setAttribute("costs", list);
         //当前：/netctoss/findCost.do
         //目标：/netctoss/WEB-INF/cost/find.jsp
-        request.getRequestDispatcher("WEB-INF/cost/find.jsp").forward(request, response);
+        //request.getRequestDispatcher("WEB-INF/cost/find.jsp").forward(request, response);
+        int page;
+        CostDAO dao=new CostDAOImpl();
+        if(request.getParameter("page")==null){
+            System.out.println("page是空的");
+            page=1;
+        }else {
+            page=Integer.parseInt(request.getParameter("page"));
+        }
+        System.out.println("page:"+page);
+        int pageSize=3;
+        try {
+            int totalPage=dao.findTotalPage(pageSize);
+            List<Cost> list=dao.findByPage(page,pageSize);
+            request.setAttribute("page", page);
+            request.setAttribute("costs", list);
+            request.setAttribute("totalPage", totalPage);
+            request.getRequestDispatcher("WEB-INF/cost/find.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //打开增加资费页面
@@ -171,21 +194,32 @@ public class MainServlet extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/main/index.jsp").forward(request, response);
     }
 
-    //打开主页
-    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    //处理登录数据
+    protected void login(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws ServletException, IOException{
+        //获取网页上的验证码和自动生成的验证码
+        String number1 = request.getParameter("number");
+        String number2 = (String)session.getAttribute("number");
+
+        //获取账号密码
         String admin_code=request.getParameter("admin_code");
         String password=request.getParameter("password");
+        request.setAttribute("admin_code",admin_code);
+        request.setAttribute("password",password);
         //校验
         AdminDAO dao=new AdminDAOImpl();
         try {
-            Admin a=dao.findByCode(admin_code);
-            if(a==null){
+            Admin admin=dao.findByCode(admin_code);
+            if(admin==null){
                 request.setAttribute("error","账号错误");
                 request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
-            }else if(!a.getPassword().equals(password)){
+            }else if(!admin.getPassword().equals(password)){
                 request.setAttribute("error","密码错误");
                 request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
+            }else if(!number1.equalsIgnoreCase(number2)){
+                request.setAttribute("error","验证码错误");
+                request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
             }else{
+                session.setAttribute("admin", admin);
                 response.sendRedirect("toIndex.do");
             }
         } catch (Exception e) {

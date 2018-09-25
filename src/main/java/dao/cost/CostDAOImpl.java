@@ -157,13 +157,7 @@ public class CostDAOImpl implements CostDAO{
     }
 
     public List<Cost> findByPage(int page, int pageSize) throws Exception {
-		/*
-		 * 小于下一页的最小值；
-		 * 大于上一页的最大值
-		 */
-        String sql="select * from (" +
-                "select c.*,rownum r from cost c" +
-                " where rownum<? )where r>?";
+        String sql="select * from (select c.*,rownum r from cost c where rownum<? )where r>?";
         Connection conn = DBUtil.getConnection();
         List<Cost> list = new ArrayList<Cost>();
         try {
@@ -275,4 +269,5 @@ public class CostDAOImpl implements CostDAO{
 //        c.setCost_type("1");
 //        dao.save(c);
     }
+
 }

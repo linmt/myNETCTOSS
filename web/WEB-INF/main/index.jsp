@@ -17,6 +17,14 @@
     <link type="text/css" rel="stylesheet" media="all" href="styles/global_color.css" />
 </head>
 <body class="index">
+<%
+    Object obj=session.getAttribute("admin");
+    if(obj==null){
+        //没有登录成功，或者session超时
+        response.sendRedirect("toLogin.do");
+        return;
+    }
+%>
 <!--导航区域开始-->
 <div id="index_navi">
     <ul id="menu">

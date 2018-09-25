@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <!--mainServlet-->
     <servlet>
         <servlet-name>mainServlet</servlet-name>
         <servlet-class>web.MainServlet</servlet-class>
@@ -11,5 +12,15 @@
     <servlet-mapping>
         <servlet-name>mainServlet</servlet-name>
         <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+
+    <!--验证码-->
+    <servlet>
+        <servlet-name>CheckcodeServlet</servlet-name>
+        <servlet-class>web.CheckcodeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckcodeServlet</servlet-name>
+        <url-pattern>/checkcode</url-pattern>
     </servlet-mapping>
 </web-app>
