@@ -11,6 +11,10 @@
 <div id="header">
     <img src="images/logo.png" alt="logo" class="left"/>
     <%--方法一：用request.getCookies();遍历--%>
+    <%--
     <span>${cookie.admin_code.value}</span>
-    <a href="/toLogin.do">[退出]</a>
+    以下方式也行
+    --%>
+    <span>${sessionScope.admin.admin_code}</span>
+    <a href="/toLogout.do">[退出]</a>
 </div>

@@ -30,17 +30,17 @@
                 在浏览器保存
                 <td colspan="2"><input name="admin_code" type="text" class="width150" value="${cookie.admin_code.value}"/></td>
                 --%>
-                <td colspan="2"><input name="admin_code" type="text" class="width150" value="${cookie.admin_code.value}"/></td>
+                <td colspan="2"><input name="admin_code" type="text" class="width150" value="${sessionScope.admin_code}"/></td>
                 <td class="login_error_info"><span class="required">30长度的字母、数字和下划线</span></td>
             </tr>
             <tr>
                 <td class="login_info">密码：</td>
                 <%--
                 <td colspan="2"><input name="password" type="password" class="width150" value="${param.password}"/></td>
-                <td colspan="2"><input name="password" type="password" class="width150" value="<%=session.getAttribute("password")%>"/></td>
+                <td colspan="2"><input name="password" type="password" class="width150" value="<%=session.getAttribute("password")%>"/></td>  等价于${sessionScope.admin.password}
                 <td colspan="2"><input name="password" type="password" class="width150" value="${cookie.password.value}"/></td>
                 --%>
-                <td colspan="2"><input name="password" type="password" class="width150" value="${cookie.password.value}"/></td>
+                <td colspan="2"><input name="password" type="password" class="width150" value="${sessionScope.password}"/></td>
                 <td><span class="required">30长度的字母、数字和下划线</span></td>
             </tr>
             <tr>

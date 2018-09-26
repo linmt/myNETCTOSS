@@ -23,7 +23,9 @@ public class MainServlet extends HttpServlet {
         String uri = request.getRequestURI();
         String action = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
         request.setCharacterEncoding("utf-8");
+
         HttpSession session = request.getSession();
+
         if (action.equals("/findCost")) {
             try {
                 findCost(request,response,session);
@@ -47,7 +49,8 @@ public class MainServlet extends HttpServlet {
             toIndex(request,response);
         }else if(action.equals("/login")){
             login(request,response,session);
-        }else if(action.equals("/logout")){
+        }else if(action.equals("/toLogout")){
+            //为何账号密码还在？
             session.invalidate();
             response.sendRedirect("toLogin.do");
         }else{
@@ -219,30 +222,36 @@ public class MainServlet extends HttpServlet {
 
         //校验
         AdminDAO dao=new AdminDAOImpl();
+        Admin admin= null;
         try {
-            Admin admin=dao.findByCode(admin_code);
-            if(admin==null){
-                request.setAttribute("error","账号错误");
-                request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
-            }else if(!admin.getPassword().equals(password)){
-                request.setAttribute("error","密码错误");
-                request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
-            }else if(!number1.equalsIgnoreCase(number2)){
-                request.setAttribute("error","验证码错误");
-                request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
-            }else{
-                //页面显示账号
-                //这里的cookie不用改路径，因为这个cookie是在/netctoss/login.do下的，对/netctoss下的所有文件都有效
-                Cookie ck=new Cookie("admin_code",admin_code);
-                response.addCookie(ck);
-                Cookie ck2=new Cookie("password",password);
-                response.addCookie(ck2);
-                //这里传用户名过去是为了确保不是直接通过toIndex.do登录的
-                session.setAttribute("admin", admin);
-                response.sendRedirect("toIndex.do");
-            }
+            admin = dao.findByCode(admin_code);
+            //这里传用户名过去是为了确保不是直接通过toIndex.do登录的
+            session.setAttribute("admin", admin);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        session.setAttribute("admin_code", admin_code);
+        session.setAttribute("password", password);
+
+        if(admin==null){
+            request.setAttribute("error","账号错误");
+            request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
+        }else if(!admin.getPassword().equals(password)){
+            request.setAttribute("error","密码错误");
+            request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
+        }else if(!number1.equalsIgnoreCase(number2)){
+            request.setAttribute("error","验证码错误");
+            request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
+        }else{
+            //页面显示账号
+            //这里的cookie不用改路径，因为这个cookie是在/netctoss/login.do下的，对/netctoss下的所有文件都有效
+            Cookie ck=new Cookie("admin_code",admin_code);
+            response.addCookie(ck);
+            Cookie ck2=new Cookie("password",password);
+            response.addCookie(ck2);
+
+            response.sendRedirect("toIndex.do");
         }
     }
 }
