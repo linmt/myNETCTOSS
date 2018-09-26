@@ -47,9 +47,9 @@
                 <td class="login_info">验证码：</td>
                 <td class="width70"><input name="number" type="text" class="width70" /></td>
                 <td>
-                    <img src="checkcode" alt="验证码" title="点击更换"  id="img1"/>
+                    <img src="createImg.do" alt="验证码" title="点击更换"  id="img1"/>
                 </td>
-                <td><a href="javascript:;"onclick="document.getElementById('img1').src='checkcode?'+Math.random();">看不清，换一个</a></td>
+                <td><a href="javascript:;"onclick="document.getElementById('img1').src='createImg.do?'+Math.random();">看不清，换一个</a></td>
             </tr>
             <tr>
                 <td></td>

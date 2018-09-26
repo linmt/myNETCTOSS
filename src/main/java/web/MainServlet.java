@@ -6,11 +6,17 @@ import dao.cost.CostDAO;
 import dao.cost.CostDAOImpl;
 import entity.Admin;
 import entity.Cost;
+import util.ImageUtil;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 张洲徽 on 2018/9/20.
@@ -53,6 +59,8 @@ public class MainServlet extends HttpServlet {
             //为何账号密码还在？
             session.invalidate();
             response.sendRedirect("toLogin.do");
+        }else if(action.equals("/createImg")){
+            createImg(request,response);
         }else{
             throw new RuntimeException("地址错误");
         }
@@ -255,4 +263,21 @@ public class MainServlet extends HttpServlet {
             response.sendRedirect("toIndex.do");
         }
     }
+
+    //生成验证码
+    protected void createImg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        Object[] objects=ImageUtil.createImage();
+        //验证码存入session
+        HttpSession session=request.getSession();
+        session.setAttribute("number",objects[0]);
+        //将图片输出给浏览器
+        //输出的类型可以看tomcat的配置文件web.xml
+        response.setContentType("image/jpeg");
+        //获取输出流，服务器自己创建的，所输出的目标就是当前访问的浏览器
+        OutputStream os=response.getOutputStream();
+        BufferedImage img=(BufferedImage)objects[1];
+        ImageIO.write(img,"jpeg",os);
+        os.close();
+    }
+
 }

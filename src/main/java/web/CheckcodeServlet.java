@@ -32,9 +32,11 @@ public class CheckcodeServlet extends HttpServlet {
         //设置字体(字体,风格,大小)
         g.setFont(new Font(null, Font.ITALIC,24));
         String number = getNumber(2);
+
         //将验证码(number)绑定到session对象上
         HttpSession session=request.getSession();
         session.setAttribute("number", number);
+
         g.drawString(number,2,26);
         //step7,加一些干扰线
         for(int i=0;i<6;i++){
