@@ -37,7 +37,7 @@
                 <td class="login_info">密码：</td>
                 <%--
                 <td colspan="2"><input name="password" type="password" class="width150" value="${param.password}"/></td>
-                <td colspan="2"><input name="password" type="password" class="width150" value="<%=session.getAttribute("password")%>"/></td>  等价于${sessionScope.admin.password}
+                <td colspan="2"><input name="password" type="password" class="width150" value="<%=session.getAttribute("password")%>"/></td>  等价于${sessionScope.admin.password}  或${admin.password}
                 <td colspan="2"><input name="password" type="password" class="width150" value="${cookie.password.value}"/></td>
                 --%>
                 <td colspan="2"><input name="password" type="password" class="width150" value="${sessionScope.password}"/></td>

@@ -231,6 +231,7 @@ public class MainServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        //将账号密码传到jsp，就可以用session对象获取，但其实在jsp直接写${param.password}就可以获取
         session.setAttribute("admin_code", admin_code);
         session.setAttribute("password", password);
 
