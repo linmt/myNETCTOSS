@@ -30,6 +30,9 @@
     <%--
     <%@include file="../public/header.jsp" %>
     --%>
+    <%--
+        此处要站在服务器的角度看，因为import标签是服务器调用的，服务器在翻译的时候使用该标签，服务器直接将header.jsp加到当前jsp中
+    --%>
     <c:import url="../public/header.jsp"></c:import>
 </div>
 </body>

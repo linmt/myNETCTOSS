@@ -28,7 +28,12 @@ public class MainServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         if (action.equals("/findCost")) {
-            findCost(request,response,session);
+            try {
+                findCost(request,response,session);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new ServletException("异常",e);
+            }
         }else if(action.equals("/toAddCost")){
             toAddCost(request,response);
         }else if(action.equals("/addCost")){
@@ -53,7 +58,7 @@ public class MainServlet extends HttpServlet {
         }
     }
     //查询资费
-    protected void findCost(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws ServletException, IOException{
+    protected void findCost(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception {
         //CostDAO dao=new CostDAOImpl();
         //List<Cost> list=dao.findAll();
         //request.setAttribute("costs", list);
@@ -78,7 +83,8 @@ public class MainServlet extends HttpServlet {
             request.setAttribute("totalPage", totalPage);
             request.getRequestDispatcher("WEB-INF/cost/find.jsp").forward(request, response);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            throw new Exception("有异常！",e);
         }
     }
 

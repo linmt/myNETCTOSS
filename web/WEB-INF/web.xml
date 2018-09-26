@@ -23,4 +23,14 @@
         <servlet-name>CheckcodeServlet</servlet-name>
         <url-pattern>/checkcode</url-pattern>
     </servlet-mapping>
+
+    <!--错误处理-->
+    <error-page>
+        <exception-type>javax.servlet.ServletException</exception-type>
+        <!--此处是绝对路径，特殊的地方是，比如你在eclipse中，应该写/netctoss/WEB-INF/public/error.jsp
+            但是由于是转发过去的，只能访问此项目内部的资源，所以Tomcat会自动加上项目名，在eclipse中，
+            此处应写成/WEB-INF/public/error.jsp
+        -->
+        <location>/WEB-INF/public/error.jsp</location>
+    </error-page>
 </web-app>
