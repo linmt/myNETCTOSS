@@ -8,10 +8,7 @@ import entity.Admin;
 import entity.Cost;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -209,8 +206,17 @@ public class MainServlet extends HttpServlet {
         //获取账号密码
         String admin_code=request.getParameter("admin_code");
         String password=request.getParameter("password");
+
+        //这里是重定向，不能用request.setAttribute，如果非要传数据过去jsp，第一种方法是：
+        // response.sendRedirect("a.jsp?a=cha");
+        //那么在a.jsp页面上直接<%=request.getParameter("a")%>就可以了，不用写<%Object a = (Object)request.getAttribute("cha");%>
+        //这种方式不可传变量？
         //request.setAttribute("admin_code",admin_code);
         //request.setAttribute("password",password);
+
+        //session.setAttribute("admin_code", admin_code);
+        //session.setAttribute("password", password);
+
         //校验
         AdminDAO dao=new AdminDAOImpl();
         try {
@@ -225,6 +231,13 @@ public class MainServlet extends HttpServlet {
                 request.setAttribute("error","验证码错误");
                 request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
             }else{
+                //页面显示账号
+                //这里的cookie不用改路径，因为这个cookie是在/netctoss/login.do下的，对/netctoss下的所有文件都有效
+                Cookie ck=new Cookie("admin_code",admin_code);
+                response.addCookie(ck);
+                Cookie ck2=new Cookie("password",password);
+                response.addCookie(ck2);
+                //这里传用户名过去是为了确保不是直接通过toIndex.do登录的
                 session.setAttribute("admin", admin);
                 response.sendRedirect("toIndex.do");
             }

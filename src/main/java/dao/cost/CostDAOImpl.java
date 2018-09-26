@@ -181,7 +181,7 @@ public class CostDAOImpl implements CostDAO{
     }
 
     public int findTotalPage(int pageSize) throws Exception {
-        String sql = "select count(*) form cost";
+        String sql = "select count(*) from cost";
         Connection conn = DBUtil.getConnection();
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);

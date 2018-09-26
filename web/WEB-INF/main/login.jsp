@@ -22,12 +22,25 @@
         <table>
             <tr>
                 <td class="login_info">账号：</td>
+                <%--
+                这种方式退出后不能保存账号密码，只能在转发中保留账号密码
                 <td colspan="2"><input name="admin_code" type="text" class="width150" value="${param.admin_code}"/></td>
+                在会话中保存
+                <td colspan="2"><input name="admin_code" type="text" class="width150" value="<%=session.getAttribute("admin_code")%>"/></td>
+                在浏览器保存
+                <td colspan="2"><input name="admin_code" type="text" class="width150" value="${cookie.admin_code.value}"/></td>
+                --%>
+                <td colspan="2"><input name="admin_code" type="text" class="width150" value="${cookie.admin_code.value}"/></td>
                 <td class="login_error_info"><span class="required">30长度的字母、数字和下划线</span></td>
             </tr>
             <tr>
                 <td class="login_info">密码：</td>
+                <%--
                 <td colspan="2"><input name="password" type="password" class="width150" value="${param.password}"/></td>
+                <td colspan="2"><input name="password" type="password" class="width150" value="<%=session.getAttribute("password")%>"/></td>
+                <td colspan="2"><input name="password" type="password" class="width150" value="${cookie.password.value}"/></td>
+                --%>
+                <td colspan="2"><input name="password" type="password" class="width150" value="${cookie.password.value}"/></td>
                 <td><span class="required">30长度的字母、数字和下划线</span></td>
             </tr>
             <tr>
