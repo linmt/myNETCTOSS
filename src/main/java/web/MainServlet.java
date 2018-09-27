@@ -22,8 +22,14 @@ import java.util.List;
 public class MainServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获得路径的第一种方式
         //String p=request.getServletPath();
+        //if ("/findCost.do".equals(p)) {
         //System.out.println("MainServlet的request.getServletPath()："+p+"，结束");//   /findCost.do
+
+        //获得路径的第二种方式        request.getContextPath()
+
+        //获得路径的第三种方式  getRequestURI   getRequestURL
         String uri = request.getRequestURI();
         String action = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
         request.setCharacterEncoding("utf-8");
@@ -65,12 +71,16 @@ public class MainServlet extends HttpServlet {
     }
     //查询资费
     protected void findCost(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception {
+        //查询所有资费
         //CostDAO dao=new CostDAOImpl();
         //List<Cost> list=dao.findAll();
+        //转发到JSP
+        //用的是同一份数据list，所以用转发
         //request.setAttribute("costs", list);
         //当前：/netctoss/findCost.do
         //目标：/netctoss/WEB-INF/cost/find.jsp
         //request.getRequestDispatcher("WEB-INF/cost/find.jsp").forward(request, response);
+
         int page;
         CostDAO dao=new CostDAOImpl();
         if(request.getParameter("page")==null){
