@@ -24,4 +24,14 @@
         -->
         <location>/WEB-INF/public/error.jsp</location>
     </error-page>
+
+    <!--权限检查-->
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>web.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
 </web-app>

@@ -234,6 +234,10 @@ public class MainServlet extends HttpServlet {
             //这里传用户名过去是为了确保不是直接通过toIndex.do登录的
             //在过滤器中处理，这里的不写
             //session.setAttribute("admin", admin);
+
+            if(admin!=null){
+                session.setAttribute("admin", admin);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

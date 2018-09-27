@@ -42,6 +42,7 @@
         }
 
         //跳转框回车事件
+        //与网页自带的回车事件冲突
         function keyDown(e) {
             var ev= window.event||e;
             if (ev.keyCode == 13) {
