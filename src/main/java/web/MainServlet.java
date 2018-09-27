@@ -12,11 +12,9 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.awt.image.BufferedImage;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 张洲徽 on 2018/9/20.
@@ -76,12 +74,12 @@ public class MainServlet extends HttpServlet {
         int page;
         CostDAO dao=new CostDAOImpl();
         if(request.getParameter("page")==null){
-            System.out.println("page是空的");
+            //System.out.println("page是空的");
             page=1;
         }else {
             page=Integer.parseInt(request.getParameter("page"));
         }
-        System.out.println("page:"+page);
+        //System.out.println("page:"+page);
         int pageSize=3;
         try {
             int totalPage=dao.findTotalPage(pageSize);
@@ -234,7 +232,8 @@ public class MainServlet extends HttpServlet {
         try {
             admin = dao.findByCode(admin_code);
             //这里传用户名过去是为了确保不是直接通过toIndex.do登录的
-            session.setAttribute("admin", admin);
+            //在过滤器中处理，这里的不写
+            //session.setAttribute("admin", admin);
         } catch (Exception e) {
             e.printStackTrace();
         }

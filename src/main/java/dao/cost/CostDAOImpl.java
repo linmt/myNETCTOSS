@@ -141,7 +141,7 @@ public class CostDAOImpl implements CostDAO{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1,cost_id);
             int i = ps.executeUpdate();
-            System.out.println("删除："+i);
+            //System.out.println("删除："+i);
             con.commit();
         } catch (SQLException e) {
             try {

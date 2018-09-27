@@ -36,9 +36,18 @@
             var r = window.confirm("确定要删除此资费吗？");
             if(r) {
                 // http://localhost:8080/NETCTOSS/cost
-                location.href = "deleteCost.do?cost_id="+cost_id;
+                window.location.href = "deleteCost.do?cost_id="+cost_id;
             }
             //document.getElementById("operate_result_info").style.display = "block";
+        }
+
+        //跳转框回车事件
+        function keyDown(e) {
+            var ev= window.event||e;
+            if (ev.keyCode == 13) {
+                alert("回车");
+                window.location.href="findCost.do?page=${page+1}";
+            }
         }
     </script>
 </head>
@@ -55,7 +64,7 @@
 <!--导航区域结束-->
 <!--主要区域开始-->
 <div id="main">
-    <form action="" method="get">
+    <form action="findCost.do" method="get">
         <!--排序-->
         <div class="search_add">
             <div>
@@ -122,7 +131,8 @@
             <c:if test="${page>1}">
                 <a href="findCost.do?page=${page-1}">上一页</a>
             </c:if>
-            <c:forEach var="p" begin="1" end="${totalPage}">
+            <!--不能所有页数都显示出来-->
+            <c:forEach var="p" begin="${page}" end="${page}">
                 <c:if test="${p==page}">
                     <a href="findCost.do?page=${p}" class="current_page">${p}</a>
                 </c:if>
@@ -134,6 +144,8 @@
             <c:if test="${page<totalPage}">
                 <a href="findCost.do?page=${page+1}">下一页</a>
             </c:if>
+            共${totalPage}页
+            跳转到 <input type="text" id="skip_to_page" name="page" style="width:25px"/> 页
         </div>
     </form>
 </div>

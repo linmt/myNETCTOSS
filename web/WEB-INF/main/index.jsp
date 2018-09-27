@@ -17,14 +17,15 @@
     <link type="text/css" rel="stylesheet" media="all" href="styles/global_color.css" />
 </head>
 <body class="index">
-<%
+<%--
+    在过滤器中做检查
     Object obj=session.getAttribute("admin");
     if(obj==null){
         //没有登录成功，或者session超时
         response.sendRedirect("toLogin.do");
         return;
     }
-%>
+--%>
 <!--导航区域开始-->
 <div id="index_navi">
     <%--
