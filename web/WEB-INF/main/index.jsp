@@ -28,12 +28,11 @@
 --%>
 <!--导航区域开始-->
 <div id="index_navi">
-    <%--
-    <%@include file="../public/header.jsp" %>
-    --%>
-    <%--
-        此处要站在服务器的角度看，因为import标签是服务器调用的，服务器在翻译的时候使用该标签，服务器直接将header.jsp加到当前jsp中
-    --%>
+    <%--  <%@include file="../public/header.jsp" %>   --%>
+    <%--路径问题：此处要站在服务器的角度看，因为import标签是服务器调用的，
+        服务器在翻译的时候使用该标签，服务器直接将header.jsp加到当前jsp中，
+        所以当前和目标路径是相同的
+     --%>
     <c:import url="../public/header.jsp"></c:import>
 </div>
 </body>

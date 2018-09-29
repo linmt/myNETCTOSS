@@ -77,8 +77,9 @@ public class MainServlet extends HttpServlet {
         //转发到JSP
         //用的是同一份数据list，所以用转发
         //request.setAttribute("costs", list);
+        //路径问题一
         //当前：/netctoss/findCost.do
-        //目标：/netctoss/WEB-INF/cost/find.jsp
+        //目标：/netctoss/WEB-INF/cost/find.jsp   动态资源，用网名
         //request.getRequestDispatcher("WEB-INF/cost/find.jsp").forward(request, response);
 
         int page;
@@ -121,6 +122,7 @@ public class MainServlet extends HttpServlet {
         Cost c=new Cost();
         c.setName(name);
         c.setCost_type(cost_type);
+        //字符串转成Integer，但是要防止空值，控制不用去new，因为本来setBase_duration就是null
         if (base_duration!=null && !base_duration.equals("")){
             c.setBase_duration(Integer.parseInt(base_duration));
         }
@@ -256,6 +258,7 @@ public class MainServlet extends HttpServlet {
         session.setAttribute("admin_code", admin_code);
         session.setAttribute("password", password);
 
+        //失败之后可以转发到login.jsp也可以重定向到toLogin.do，重定向更好一点，因为这是两个独立的请求，但是这样就无法保留账号密码数据
         if(admin==null){
             request.setAttribute("error","账号错误");
             request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);

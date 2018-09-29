@@ -46,6 +46,7 @@ public class CostDAOImpl implements CostDAO{
             conn.setAutoCommit(false);
             prep = conn.prepareStatement(sql);
             prep.setString(1, cost.getName());
+            //setInt不允许传入null，故用setObject
             prep.setObject(2, cost.getBase_duration());
             prep.setObject(3, cost.getBase_cost());
             prep.setObject(4, cost.getUnit_cost());

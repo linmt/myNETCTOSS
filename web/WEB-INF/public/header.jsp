@@ -72,7 +72,7 @@
 </script>
 <div id="navi">
     <ul id="menu">
-        <!--由于该jsp被其他jsp公用，因此无法预估目前是谁调用该jsp，所以此处适合写绝对路径-->
+        <!--由于该jsp被其他jsp公用，因此无法预估目前是谁调用该jsp，即当前路径无法确定，所以此处适合写绝对路径，eclipse中/netctoss/toIndex.do-->
         <li><a href="/toIndex.do" class="index_off" ></a></li>
         <li><a href="../role/findRole.do" class="role_off" ></a></li>
         <li><a href="../admin/admin_list.html" class="admin_off"></a></li>

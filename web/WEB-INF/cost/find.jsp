@@ -13,7 +13,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>达内－NetCTOSS</title>
-    <!--当前路径是web/findCost.do   图片的路径是：web/images/logo.png-->
+    <!--
+        路径问题二
+        当前路径是web/findCost.do   图片的路径是：web/images/logo.png
+    -->
     <link type="text/css" rel="stylesheet" media="all" href="styles/global.css" />
     <link type="text/css" rel="stylesheet" media="all" href="styles/global_color.css" />
     <script language="javascript" type="text/javascript">
@@ -81,6 +84,7 @@
         </div>
         <!--启用操作的操作提示-->
         <div id="operate_result_info" class="operate_success">
+            <%--路径问题三--%>
             <img src="images/close.png" onclick="this.parentNode.style.display='none';" />
             删除成功！
         </div>
@@ -113,6 +117,7 @@
                         </c:choose>
                         <td>
                             <input type="button" value="启用" class="btn_start" onclick="startFee();" />
+                            <!--只传id，一是传的数据量少，二是防止多人修改产生意外-->
                             <input type="button" value="修改" class="btn_modify" onclick="location.href='toUpdateCost.do?cost_id=${c.cost_id}';" />
                             <input type="button" value="删除" class="btn_delete" onclick="deleteFee(${c.cost_id});" />
                         </td>

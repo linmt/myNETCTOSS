@@ -80,6 +80,7 @@
     <form action="updateCost.do" method="post" class="main_form">
         <div class="text_info clearfix"><span>资费ID：</span></div>
         <div class="input_info">
+            <%--默认值${cost.cost_id }--%>
             <input type="text" class="readonly" name="cost_id" value="${cost.cost_id }" readonly="readonly" />
         </div>
         <div class="text_info clearfix"><span>资费名称：</span></div>
@@ -90,6 +91,8 @@
         </div>
         <div class="text_info clearfix"><span>资费类型：</span></div>
         <div class="input_info fee_type">
+            <%--input包含JSTL标签--%>
+            <%--EL标签方式：${cost.cost_type==1?'checked':'' }代替checked="<c:if test="${cost.cost_type==1 }">checked</c:if>"--%>
             <input type="radio" name="cost_type" value="1" id="monthly" onclick="feeTypeChange(1);"
                    checked="<c:if test="${cost.cost_type==1 }">checked</c:if>" />
             <label for="monthly">包月</label>

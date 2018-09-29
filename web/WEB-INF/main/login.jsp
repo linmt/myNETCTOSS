@@ -18,6 +18,7 @@
 </head>
 <body class="index">
 <div class="login_box">
+    <%--有密码不能用get--%>
     <form action="login.do" method="post">
         <table>
             <tr>
