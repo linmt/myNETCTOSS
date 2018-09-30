@@ -269,12 +269,13 @@ public class MainServlet extends HttpServlet {
             request.setAttribute("error","验证码错误");
             request.getRequestDispatcher("WEB-INF/main/login.jsp").forward(request, response);
         }else{
-            //页面显示账号
-            //这里的cookie不用改路径，因为这个cookie是在/netctoss/login.do下的，对/netctoss下的所有文件都有效
+            //页面显示账号，这里的cookie不用改路径，因为这个cookie是在/netctoss/login.do下的，对/netctoss下的所有文件都有效
             Cookie ck=new Cookie("admin_code",admin_code);
             response.addCookie(ck);
             Cookie ck2=new Cookie("password",password);
             response.addCookie(ck2);
+
+            //如果要在logo区域显示名称的话，也可以在这里将名称存入session  session.setAttribute("admin_code", admin_code);
 
             response.sendRedirect("toIndex.do");
         }

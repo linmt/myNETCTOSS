@@ -46,10 +46,16 @@
             </tr>
             <tr>
                 <td class="login_info">验证码：</td>
+                <%--input中要有name--%>
                 <td class="width70"><input name="number" type="text" class="width70" /></td>
                 <td>
                     <img src="createImg.do" alt="验证码" title="点击更换"  id="img1"/>
                 </td>
+                <%--
+                    换图片是DOM操作，DOM可以读写节点的内容、值、属性，但是该节点没有内容和值，
+                    所以只能改属性src，this.setAttribute('src','createImg.do')，对于新浏览器，这样写就可以了，
+                    旧的浏览器的写法this.setAttribute('src','createImg.do?x='+Math.random())
+                 --%>
                 <td><a href="javascript:;"onclick="document.getElementById('img1').src='createImg.do?'+Math.random();">看不清，换一个</a></td>
             </tr>
             <tr>
